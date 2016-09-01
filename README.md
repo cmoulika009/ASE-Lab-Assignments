@@ -1,4 +1,4 @@
 
-This repository contains all the documents and source code for lab assignments
+This repository contains all the lab assignments for ASE
 
 
