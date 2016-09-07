@@ -1,4 +1,14 @@
-This folder contains all the documents and source code related to Lab-2
+•	This folder contains all the documents and source code related to Lab-2
 
+•	The main aim of this Tutorial is 
+      1. To develop a web application using HTML5,CSS,Angular-JS,AJAX.
+      2. To develop attractive UI using Bootsrap 
+      3. To develop wireframes using Creately
+      4. To check the quality of code using JSLint.
 
+•	Web Application is basically created with 3 pages i.e Login,Registration,Home.
+
+•	In the Home page using Google web services direction and weather is fetched for source & direction.
+
+•	The below is the Wiki Link for Lab Assignment 2
 Wiki Link : https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/ASE-Lab-Assignment-2
