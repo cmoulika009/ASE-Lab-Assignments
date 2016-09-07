@@ -40,7 +40,7 @@
                placeholder="Choose Starting Point.." style="color: black;">
         <input id="destination-input" class="controls" type="text"
                placeholder="Choose Destination.." style="color: black;"><br/><br/>
-        <button type="submit" value="Submit" id="changemode-walking">Get Direction & Weather</button>
+        <button type="submit" value="Submit" id="changemode-walking">Direction & Weather</button>
         <br/>
     </div>
     <div class="row">
@@ -50,16 +50,36 @@
             </div>
         </div>
 
-
         <div class="col-sm-2"></div>
 
         <div class="col-sm-4">
             <div class="form-box">
                 <div class="form-top">
                     <div class="form-top-left">
-                        <h3 align="center">Weather Details</h3>
-                        <b>Starting Point Weather Details: 84 &deg F </b><br/>
-                        <b>Destination Weather Details: 80 &deg F</b>
+                        <div ng-controller="weatherCtrl">
+                            <form>
+                                <div class="form-group">
+
+                                </div>
+                            </form>
+                            <p ng-show="zip">Searching the forecasts for: {{zip}}</p>
+                            <div>
+                                <h3>Weather at Source: {{ place.location.city }}</h3>
+                                <p><img class="img-thumbnail forecast-img"
+                                        src="http://l.yimg.com/a/i/us/we/52/{{place.item.condition.code}}.gif"/>Current:
+                                    {{ place.item.condition.text }} | {{ place.item.condition.temp }}F</p>
+                            </div>
+                        </div>
+                        <div data-ng-controller="weatherCtrl1">
+
+                            <div>
+                                <h3>Weather at Destination: {{ place.location.city }}</h3>
+                                <p><img class="img-thumbnail forecast-img"
+                                        src="http://l.yimg.com/a/i/us/we/52/{{place.item.condition.code}}.gif"/>Current:
+                                    {{ place.item.condition.text }} | {{ place.item.condition.temp }}F</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,9 +91,8 @@
 
 
 <script>
-    // This example requires the Places library. Include the libraries=places
-    // parameter when you first load the API. For example:
-    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    var app = angular.module('GoogleDirection', []);
 
     function initMap() {
         var origin_place_id = null;
@@ -90,7 +109,6 @@
 
         var origin_input = document.getElementById('origin-input');
         var destination_input = document.getElementById('destination-input');
-        var modes = document.getElementById('mode-selector');
 
 
         var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
@@ -169,6 +187,95 @@
             });
         }
     }
+
+    app.controller('weatherCtrl', ['$scope', 'weatherService', function ($scope, weatherService) {
+        function fetchWeather(zip) {
+            weatherService.getWeather(zip).then(function (data) {
+                $scope.place = data;
+            });
+        }
+
+        fetchWeather('Kansas, United States');
+        $scope.findWeather = function (zip) {
+            $scope.place = '';
+            loc = document.getElementById('startlocation').value;
+            fetchWeather(loc);
+        };
+    }]);
+    app.factory('weatherService', ['$http', '$q', function ($http, $q) {
+        function getWeather(zip) {
+            var deferred = $q.defer();
+            $http.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + zip + '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
+                    .success(function (data) {
+                        deferred.resolve(data.query.results.channel);
+                    })
+                    .error(function (err) {
+                        console.log('Error retrieving markets');
+                        deferred.reject(err);
+                    });
+            return deferred.promise;
+        }
+
+        return {
+            getWeather: getWeather
+        };
+    }]);
+    app.factory('mySharedService', function ($rootScope) {
+        var sharedService = {};
+        sharedService.message = '';
+        sharedService.prepForBroadcast = function (msg) {
+            this.message = msg;
+            this.broadcastItem();
+        };
+        sharedService.broadcastItem = function () {
+            $rootScope.$broadcast('handleBroadcast');
+        };
+        return sharedService;
+    });
+    app.controller('weatherCtrl1', ['$scope', 'weatherService', function ($scope, weatherService) {
+        function fetchWeather(zip) {
+            weatherService.getWeather(zip).then(function (data) {
+                $scope.place = data;
+            });
+        }
+
+        fetchWeather('Texas, United States');
+        $scope.findWeather = function (zip) {
+            $scope.place = '';
+            loc = document.getElementById('endlocation').value;
+            fetchWeather(loc);
+        };
+    }]);
+    app.factory('weatherService', ['$http', '$q', function ($http, $q) {
+        function getWeather(zip) {
+            var deferred = $q.defer();
+            $http.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + zip + '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
+                    .success(function (data) {
+                        deferred.resolve(data.query.results.channel);
+                    })
+                    .error(function (err) {
+                        console.log('Error retrieving markets');
+                        deferred.reject(err);
+                    });
+            return deferred.promise;
+        }
+
+        return {
+            getWeather: getWeather
+        };
+    }]);
+    app.factory('mySharedService', function ($rootScope) {
+        var sharedService = {};
+        sharedService.message = '';
+        sharedService.prepForBroadcast = function (msg) {
+            this.message = msg;
+            this.broadcastItem();
+        };
+        sharedService.broadcastItem = function () {
+            $rootScope.$broadcast('handleBroadcast');
+        };
+        return sharedService;
+    });
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWhSE1HAi753_M8rcFTfcbBXUQInf8y6c&v=3.exp&sensor=true&libraries=places&callback=initMap"
