@@ -19,8 +19,29 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
           rel="stylesheet" type="text/css">
 
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script type="text/javascript">
+        var valid = false;
+
+        function validate() {
+            var msg = "";
+
+            var fname = document.myForm.fname.value;
+            var lname = document.myForm.lname.value;
+            var email = document.myForm.email.value;
+            var user = document.myForm.user.value;
+            var pwd = document.myForm.pwd.value;
+            var repwd = document.myForm.repwd.value;
+            if (fname.length == 0 && lname.length == 0 && email.length == 0 && user.length == 0 && pwd.length == 0 && repwd.length == 0)
+                msg = msg + "Please enter all the fields to have successful registration \n";
+            if (msg.length > 0) {
+                window.alert(msg);
+                valid = false;
+            }
+            else
+                valid = true;
+            return valid;
+        }
+    </script>
 
 
 </head>
@@ -43,37 +64,38 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="login.html" method="post" class="registration-form" data-abide>
+                        <form role="form" name="myForm" onsubmit="return validate()" method="post"
+                              class="registration-form" action="login.html" data-abide>
                             <div class="form-group">
                                 <label class="sr-only" for="form-first-name">First name</label>
-                                <input type="text" name="form-first-name" placeholder="First name..."
+                                <input type="text" name="fname" placeholder="First name..."
                                        class="form-first-name form-control" id="form-first-name">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-last-name">Last name</label>
-                                <input type="text" name="form-last-name" placeholder="Last name..."
+                                <input type="text" name="lname" placeholder="Last name..."
                                        class="form-last-name form-control" id="form-last-name">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-email">Email</label>
-                                <input type="text" name="form-email" placeholder="Email..."
+                                <input type="text" name="email" placeholder="Email..."
                                        class="form-email form-control" id="form-email">
                             </div>
 
                             <div class="form-group">
                                 <label class="sr-only" for="form-user">User Name</label>
-                                <input type="text" name="form-user" placeholder="User Name..."
+                                <input type="text" name="user" placeholder="User Name..."
                                        class="form-user form-control" id="form-user">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-pwd">Password</label>
-                                <input type="password" name="form-pwd" placeholder="Password..."
+                                <input type="password" name="pwd" placeholder="Password..."
                                        class="form-pwd form-control" id="form-pwd">
                             </div>
 
                             <div class="form-group">
                                 <label class="sr-only" for="form-re-password">Password</label>
-                                <input type="text" name="form-re-password" placeholder="Retype Password..."
+                                <input type="text" name="repwd" placeholder="Retype Password..."
                                        class="form-re-password form-control" id="form-re-password">
                             </div>
                             <button type="submit" class="btn">Sign me up!</button>
