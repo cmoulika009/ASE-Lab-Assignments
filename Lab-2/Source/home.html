@@ -5,280 +5,381 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Direct</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"
-            type="application/javascript"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAWhSE1HAi753_M8rcFTfcbBXUQInf8y6c&v=3.exp&sensor=true&amp;libraries=places"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/main.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/form-elements.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/stylish-portfolio.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- Plugin CSS -->
-    <link href="css/magnific-popup.css" rel="stylesheet">
-
-    <!-- Theme CSS -->
     <link href="css/creative.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
 
-    <style>
-        #map {
-            width: 650px;
-            height: 450px;
-            align: left;
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"
+            type="application/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+
+    <style type='text/css'>
+        .mask {
+            position: relative;
+            overflow: hidden;
+            margin: 0px auto;
+            width: 100%;
+            font-family: 'Titillium Web', sans-serif;
         }
-    </style>
-</head>
 
-<body>
-<div class="reg">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
-        <a href="index.html" class="btn btn-primary btn-xl page-scroll">Logout</a>
-    </div>
-    <h1><i style="color: whitesmoke;">Welcome to Weather Direct</i></h1><br/>
+        .header {
+            float: left;
+            width: 100%;
+            background-color: #f4f4f4
+        }
+
+        .colleft {
+            position: relative;
+            margin: 0px;
+            width: 100%;
+            right: 40%;
+            background-color: #f4f4f4
+        }
+
+        td {
+            font-size: 14px;
+            font-family: Cambria;
+            margin: 5px;
+            padding: 5px;
+            color: #0b0b0b;
+        }
+
+        .col1 {
+            overflow: hidden;
+            float: left;
+            width: 40%;
+            left: 90%;
+            background-color: whitesmoke;
+        }
+
+        .partition1 {
+            width: 50%;
+            float: left;
+        }
+
+        .partition2 {
+            width: 50%;
+            float: left;
+        }
+
+        .col2 {
+            overflow: hidden;
+            float: left;
+            width: 58%;
+            left: 1%;
+        }
+
+        .partition-wrap {
+            overflow: hidden;
+        }
+
+        .footer {
+            float: left;
+            width: 100%;
+            background-color: #b4caf7;
+        }
+
+        #map-canvas {
+            width: 55vw;
+            height: 65vh;
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-bottom: 60px;
+            padding-left: 50px;
+        }
+
+        .top-row > div {
+            float: left;
+            width: 30%;
+            margin-right: 3%;
+        }
+
+        .field-wrap {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #FFC300;
+            color: #0b0b0b;
+            border-radius: 12px;
+        }
+
+        .header1 {
+            margin: 0;
+            padding: 0;
+            font-size: 3.5em;
+            font-weight: 400;
+            color: black;
+            font-family: Cambria;
+        }
+
+    </style>
+
+</head>
+<body class="ab" style="position: fixed"><br/>
+<h1 class="header1" align="center">Welcome to Weather Direct...</h1>
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top" onclick=$("#menu-close").click();><b><i>Welcome</i></b></a>
+        </li>
+        <li>
+            <a href="index.html" align="left"><b>Logout</b></a>
+        </li>
+        <li>
+            <a href="#services" ; align="left"><b>Contact Us</b></a>
+        </li>
+    </ul>
+</nav>
+<br/>
+
+<div class="row ng-scope" ng-controller="googlemapoutput">
     <div class="row" align="center">
-        <input id="origin-input" class="controls" type="text"
-               placeholder="Choose Starting Point.." style="color: black;">
-        <input id="destination-input" class="controls" type="text"
-               placeholder="Choose Destination.." style="color: black;"><br/><br/>
-        <button type="submit" value="Submit" id="changemode-walking">Direction & Weather</button>
+        <input type="text" ng-model="startlocation" id="startlocation" required=""
+               placeholder="Enter Starting Point" googleplace="" autocomplete="off" ng-blur="getWeatherStart()"
+               style="color: black;">
+        <input type="text" ng-model="endlocation" id="endlocation" required=""
+               placeholder="Enter Destination Point" googleplace="" autocomplete="off" ng-blur="getWeatherEnd()"
+               style="color: black;">
+        <button class="button" ng-click="calcRoute()"><b>Get Direction & Weather</b></button>
+        <br/>
         <br/>
     </div>
-    <div class="row">
-        <div class="col-sm-5">
-            <div class="form-top1">
-                <div id="map" style="height: 400px;"></div>
+    <div class="col2">
+        <div id="map-canvas"></div>
+    </div>
+    <div class="col1" style="border: 10px solid">
+        <div class="partition-wrap">
+            <div class="partition1">
+                <div class="form" style="padding: 10px; margin:20px;">
+                    <h5 style="font-family: 'Verdana'; color: #0b0b0b;"><b><u>Weather at Source</u></b></h5>
+                    <table>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <img ng-src="{{iconStart}}" style="alignment: right"/></td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Sky :</b></td>
+                            <td align="left"> {{weatherStart}}</td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Temperature(&#8457;) : </b></td>
+                            <td align="left"> {{tempStart}}</td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Max Temp(&#8457;) : </b></td>
+                            <td align="left"> {{maxTempStart}}</td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Min Temp(&#8457;) : </b></td>
+                            <td align="left"> {{minTempStart}}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
-
-        <div class="col-sm-2"></div>
-
-        <div class="col-sm-4">
-            <div class="form-box">
-                <div class="form-top">
-                    <div class="form-top-left">
-                        <div ng-controller="weatherCtrl">
-                            <form>
-                                <div class="form-group">
-
-                                </div>
-                            </form>
-                            <p ng-show="zip">Searching the forecasts for: {{zip}}</p>
-                            <div>
-                                <h3>Weather at Source: {{ place.location.city }}</h3>
-                                <p><img class="img-thumbnail forecast-img"
-                                        src="http://l.yimg.com/a/i/us/we/52/{{place.item.condition.code}}.gif"/>Current:
-                                    {{ place.item.condition.text }} | {{ place.item.condition.temp }}F</p>
-                            </div>
-                        </div>
-                        <div data-ng-controller="weatherCtrl1">
-
-                            <div>
-                                <h3>Weather at Destination: {{ place.location.city }}</h3>
-                                <p><img class="img-thumbnail forecast-img"
-                                        src="http://l.yimg.com/a/i/us/we/52/{{place.item.condition.code}}.gif"/>Current:
-                                    {{ place.item.condition.text }} | {{ place.item.condition.temp }}F</p>
-                            </div>
-
-                        </div>
-                    </div>
+            <div class="partition2">
+                <div class="form" style="padding: 10px; margin:20px;">
+                    <h5 style="font-family: 'Verdana'; color: #0b0b0b;"><b><u>Weather at Destination</u></b></h5>
+                    <table>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <img ng-src="{{iconEnd}}" style="alignment: center"/></td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Sky : </b></td>
+                            <td align="left"> {{weatherEnd}}</td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Temperature(&#8457;) : </b></td>
+                            <td align="left"> {{tempEnd}}</td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Max Temp(&#8457;) : </b></td>
+                            <td align="left"> {{maxTempEnd}}</td>
+                        </tr>
+                        <tr>
+                            <td align="left"><b>Min Temp(&#8457;) : </b></td>
+                            <td align="left"> {{minTempEnd}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-</html>
 
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src="js/index.js"></script>
+
+</html>
 
 <script>
-
-    var app = angular.module('GoogleDirection', []);
-
-    function initMap() {
-        var origin_place_id = null;
-        var destination_place_id = null;
-        var travel_mode = 'WALKING';
-        var map = new google.maps.Map(document.getElementById('map'), {
-            mapTypeControl: false,
-            center: {lat: -33.8688, lng: 151.2195},
-            zoom: 13
+    var googleDemo = angular.module('GoogleDirection', [])
+    googleDemo.directive('googleplace', function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attrs, model) {
+                var options = {
+                    types: [],
+                };
+                scope.gPlace = new google.maps.places.Autocomplete(element[0],
+                        options);
+                google.maps.event.addListener(scope.gPlace, 'place_changed',
+                        function () {
+                            scope.$apply(function () {
+                                model.$setViewValue(element.val());
+                            });
+                        });
+            }
+        };
+    });
+    googleDemo.controller('googlemapoutput', function ($scope, $http) {
+        var map;
+        var mapOptions;
+        var directionsDisplay = new google.maps.DirectionsRenderer({
+            draggable: true
         });
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        directionsDisplay.setMap(map);
-
-        var origin_input = document.getElementById('origin-input');
-        var destination_input = document.getElementById('destination-input');
-
-
-        var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
-        origin_autocomplete.bindTo('bounds', map);
-        var destination_autocomplete =
-                new google.maps.places.Autocomplete(destination_input);
-        destination_autocomplete.bindTo('bounds', map);
-
-        // Sets a listener on a radio button to change the filter type on Places
-        // Autocomplete.
-        function setupClickListener(id, mode) {
-            var radioButton = document.getElementById(id);
-            radioButton.addEventListener('click', function () {
-                travel_mode = mode;
+        var directionsService = new google.maps.DirectionsService();
+        $scope.initialize = function () {
+            var pos = new google.maps.LatLng(0, 0);
+            var mapOptions = {
+                zoom: 3,
+                center: pos
+            };
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+            <!-- Added -->
+            map.set('styles', [
+                {
+                    "featureType": "all",
+                    "stylers": [
+                        {
+                            "saturation": 0
+                        },
+                        {
+                            "hue": "#e7ecf0"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "stylers": [
+                        {
+                            "saturation": -70
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "stylers": [
+                        {
+                            "visibility": "simplified"
+                        },
+                        {
+                            "saturation": -60
+                        }
+                    ]
+                }
+            ])
+        };
+        $scope.initialize = function () {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude);
+                var mapOptions = {
+                    zoom: 16,
+                    center: pos
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'),
+                        mapOptions);
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    map: map
+                });
             });
-        }
-
-        setupClickListener('changemode-walking', 'WALKING');
-        //setupClickListener('changemode-transit', 'TRANSIT');
-        //setupClickListener('changemode-driving', 'DRIVING');
-
-        function expandViewportToFitPlace(map, place) {
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-            } else {
-                map.setCenter(place.geometry.location);
-                map.setZoom(17);
-            }
-        }
-
-        origin_autocomplete.addListener('place_changed', function () {
-            var place = origin_autocomplete.getPlace();
-            if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
-                return;
-            }
-            expandViewportToFitPlace(map, place);
-
-            // If the place has a geometry, store its place ID and route if we have
-            // the other place ID
-            origin_place_id = place.place_id;
-            route(origin_place_id, destination_place_id, travel_mode,
-                    directionsService, directionsDisplay);
-        });
-
-        destination_autocomplete.addListener('place_changed', function () {
-            var place = destination_autocomplete.getPlace();
-            if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
-                return;
-            }
-            expandViewportToFitPlace(map, place);
-
-            // If the place has a geometry, store its place ID and route if we have
-            // the other place ID
-            destination_place_id = place.place_id;
-            route(origin_place_id, destination_place_id, travel_mode,
-                    directionsService, directionsDisplay);
-        });
-
-        function route(origin_place_id, destination_place_id, travel_mode,
-                       directionsService, directionsDisplay) {
-            if (!origin_place_id || !destination_place_id) {
-                return;
-            }
-            directionsService.route({
-                origin: {'placeId': origin_place_id},
-                destination: {'placeId': destination_place_id},
-                travelMode: travel_mode
-            }, function (response, status) {
-                if (status === 'OK') {
+        };
+        $scope.calcRoute = function () {
+            var end = document.getElementById('endlocation').value;
+            var start = document.getElementById('startlocation').value;
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setMap(map);
                     directionsDisplay.setDirections(response);
-                } else {
-                    window.alert('Directions request failed due to ' + status);
+                    console.log(status);
                 }
             });
-        }
-    }
-
-    app.controller('weatherCtrl', ['$scope', 'weatherService', function ($scope, weatherService) {
-        function fetchWeather(zip) {
-            weatherService.getWeather(zip).then(function (data) {
-                $scope.place = data;
-            });
-        }
-
-        fetchWeather('Kansas, United States');
-        $scope.findWeather = function (zip) {
-            $scope.place = '';
-            loc = document.getElementById('startlocation').value;
-            fetchWeather(loc);
         };
-    }]);
-    app.factory('weatherService', ['$http', '$q', function ($http, $q) {
-        function getWeather(zip) {
-            var deferred = $q.defer();
-            $http.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + zip + '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
-                    .success(function (data) {
-                        deferred.resolve(data.query.results.channel);
-                    })
-                    .error(function (err) {
-                        console.log('Error retrieving markets');
-                        deferred.reject(err);
-                    });
-            return deferred.promise;
-        }
-
-        return {
-            getWeather: getWeather
+        $scope.getWeatherEnd = function () {
+            var end = document.getElementById('endlocation').value;
+            $http.get('http://api.worldweatheronline.com/free/v2/weather.ashx?q=' + end + '&key=3e0e4ae54c6e84fece9764bb38542&format=json&tp=24&num_of_days=1').success(function (data1) {
+                $scope.tempEnd = data1.data.current_condition[0].temp_F;
+                $scope.iconEnd = data1.data.current_condition[0].weatherIconUrl[0].value;
+                $scope.weatherEnd = data1.data.current_condition[0].weatherDesc[0].value;
+                $scope.feelEnd = data1.data.current_condition[0].FeelsLikeF;
+                $scope.maxTempEnd = data1.data.weather[0].maxtempF;
+                $scope.minTempEnd = data1.data.weather[0].mintempF;
+            })
         };
-    }]);
-    app.factory('mySharedService', function ($rootScope) {
-        var sharedService = {};
-        sharedService.message = '';
-        sharedService.prepForBroadcast = function (msg) {
-            this.message = msg;
-            this.broadcastItem();
+        $scope.getWeatherStart = function () {
+            var start = document.getElementById('startlocation').value;
+            $http.get('http://api.worldweatheronline.com/free/v2/weather.ashx?q=' + start + '&key=3e0e4ae54c6e84fece9764bb38542&format=json&tp=24&num_of_days=1').success(function (data1) {
+                $scope.tempStart = data1.data.current_condition[0].temp_F;
+                $scope.iconStart = data1.data.current_condition[0].weatherIconUrl[0].value;
+                $scope.weatherStart = data1.data.current_condition[0].weatherDesc[0].value;
+                $scope.feelStart = data1.data.current_condition[0].FeelsLikeF;
+                $scope.maxTempStart = data1.data.weather[0].maxtempF;
+                $scope.minTempStart = data1.data.weather[0].mintempF;
+            })
         };
-        sharedService.broadcastItem = function () {
-            $rootScope.$broadcast('handleBroadcast');
-        };
-        return sharedService;
+        google.maps.event.addDomListener(window, 'load', $scope.initialize);
     });
-    app.controller('weatherCtrl1', ['$scope', 'weatherService', function ($scope, weatherService) {
-        function fetchWeather(zip) {
-            weatherService.getWeather(zip).then(function (data) {
-                $scope.place = data;
-            });
-        }
 
-        fetchWeather('Texas, United States');
-        $scope.findWeather = function (zip) {
-            $scope.place = '';
-            loc = document.getElementById('endlocation').value;
-            fetchWeather(loc);
-        };
-    }]);
-    app.factory('weatherService', ['$http', '$q', function ($http, $q) {
-        function getWeather(zip) {
-            var deferred = $q.defer();
-            $http.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + zip + '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
-                    .success(function (data) {
-                        deferred.resolve(data.query.results.channel);
-                    })
-                    .error(function (err) {
-                        console.log('Error retrieving markets');
-                        deferred.reject(err);
-                    });
-            return deferred.promise;
-        }
-
-        return {
-            getWeather: getWeather
-        };
-    }]);
-    app.factory('mySharedService', function ($rootScope) {
-        var sharedService = {};
-        sharedService.message = '';
-        sharedService.prepForBroadcast = function (msg) {
-            this.message = msg;
-            this.broadcastItem();
-        };
-        sharedService.broadcastItem = function () {
-            $rootScope.$broadcast('handleBroadcast');
-        };
-        return sharedService;
+    $("#menu-close").click(function (e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
     });
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
 </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWhSE1HAi753_M8rcFTfcbBXUQInf8y6c&v=3.exp&sensor=true&libraries=places&callback=initMap"
-        async defer></script>
-</body>
-</html>

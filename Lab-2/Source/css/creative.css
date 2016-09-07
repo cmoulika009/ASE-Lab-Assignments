@@ -464,6 +464,15 @@ fieldset[disabled] .btn-primary.active {
     text-transform: uppercase;
 }
 
+.btn1 {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    border: none;
+    border-radius: 300px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #d58512;
+}
+
 .btn-xl {
     padding: 15px 30px;
 }
