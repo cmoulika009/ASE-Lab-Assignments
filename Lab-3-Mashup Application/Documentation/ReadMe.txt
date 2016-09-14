@@ -1,0 +1,1 @@
+This folder contains documentation and images related to Lab 3
