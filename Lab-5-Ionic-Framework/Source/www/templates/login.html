@@ -1,0 +1,23 @@
+<ion-view view-title="Welcome to my@ConnectFriends" id="page6">
+    <ion-content padding="true" style="background: url(img/RDl8fmYQQDGOcjfVPDy8_intro-bg.jpg) no-repeat center;background-size:cover;" class="has-header">
+        <br/>
+        <form id="login-form2" class="list">
+            <ion-list id="login-list4">
+                <label class="item item-input" id="login-input3">
+                    <span class="input-label">Email Id</span>
+                    <input type="text" placeholder="" ng-model="user.email">
+                </label>
+                <br/>
+                <label class="item item-input" id="login-input4">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="" ng-model="user.pwdForLogin">
+                </label>
+            </ion-list>
+            <br/>
+            <a ng-click="signIn(user)" id="login-button4" class="button button-assertive  button-block" style="border-radius:40px 40px 40px 40px;">Sign in</a>
+            <!--ui-sref="myConnectFriends"-->
+        </form>
+        <a ng-click="modal.show()" id="login-button5" class="button button-energized  button-block button-clear icon ion-person-add" style="font-size: 20px"> New Users Register Here</a>
+    </ion-content>
+</ion-view>
+

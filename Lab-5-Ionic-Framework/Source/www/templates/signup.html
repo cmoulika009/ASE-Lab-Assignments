@@ -1,0 +1,32 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Register to my@ConnectFriends</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+
+    <ion-content class="padding"
+                 style="background: url(img/RDl8fmYQQDGOcjfVPDy8_intro-bg.jpg) no-repeat center;background-size:cover;"
+                 class="has-header">
+        <br/>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Name</span>
+                <input ng-model="user.displayname" type="text">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Email Address</span>
+                <input ng-model="user.email" type="text">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Passsword</span>
+                <input ng-model="user.password" type="password">
+            </label>
+            <br/>
+            <button class="button button-full button-positive" ng-click="createUser(user)"
+                    style="background-color: #ef473a;border-radius:40px 40px 40px 40px;">Signup
+            </button>
+        </div>
+    </ion-content>
+</ion-modal-view>
