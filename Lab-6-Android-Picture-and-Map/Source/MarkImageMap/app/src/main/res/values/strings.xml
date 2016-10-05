@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Location@Image</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_location">Location@Image</string>
+    <string name="google_app_id">image.com.MarkImageMap</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
