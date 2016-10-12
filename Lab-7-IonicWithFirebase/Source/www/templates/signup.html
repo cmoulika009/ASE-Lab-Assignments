@@ -1,0 +1,70 @@
+<ion-view style="" class=" " id="page6" title="Signup">
+  <ion-content class="has-header" padding="true" style="background: url(img/bg4.jpg) center; background-size: cover;">
+    <br/>
+    <div class="app-icon"></div>
+    <br/>
+    <form name="signupForm" class="list " id="signup-form2" style="border-radius: 5px;background-color: #f2f2f2">
+      <!-- <div class="app-icon"></div>-->
+      <form>
+        <ion-list class=" " id="signup-list3">
+          <label class="item item-input" id="login-input3">
+            <span class="input-label">Name</span>
+            <input type="text" placeholder="Name" ng-model="user.name">
+          </label>
+
+          <label class="item item-input" id="login-input4">
+            <span class="input-label">Phone</span>
+            <input type="tel" ng-model="user.phone" placeholder="Phone">
+          </label>
+          <label class="item item-input" id="login-input5">
+            <span class="input-label">Email</span>
+            <input type="email" ng-model="user.email" placeholder="Email">
+          </label>
+          <label class="item item-input" id="login-input6">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password" placeholder="Password">
+          </label>
+        </ion-list>
+      </form>
+
+      <!-- <label class="item item-input item-floating-label">
+         <span style="color: #9F9F9F;" class="input-label">Name</span>
+         <input style="color: #ffffff;" ng-model="user.name" type="text" placeholder="Name">
+       </label>
+
+       <label class="item item-input item-floating-label">
+         <span style="color: #9F9F9F;" class="input-label">Phone</span>
+         <input style="color: #ffffff;" ng-model="user.phone" type="tel" placeholder="Phone">
+       </label>
+
+       <label class="item item-input item-floating-label">
+         <span style="color: #9F9F9F;" class="input-label">Email</span>
+         <input style="color: #ffffff;" ng-model="user.email" type="email" placeholder="Email">
+       </label>
+
+       <label class="item item-input item-floating-label">
+         <span style="color: #9F9F9F;" class="input-label">Password</span>
+         <input style="color: #ffffff;" ng-model="user.password" type="password" placeholder="Password">
+       </label>
+
+
+     </ion-list>
+      <div style="width: 279px; height: 35px;" class="spacer"></div>-->
+      <button ng-click="signupEmail(signupForm,user)"
+              class=" button button-assertive  button-block  icon-left ion-ios-email-outline "
+              style="border-radius:0px 0px 0px 0px;background-color: #009689;color: whitesmoke" id="signup-button3">SIGN
+        UP WITH YOUR EMAIL
+      </button>
+      <div align="center">
+        <button ng-click="loginFb('facebook')"
+                class=" button button-positive  button-block icon-left ion-social-facebook " id="signup-button4"
+                style="width: 160px">FACEBOOK
+        </button>
+        <button ng-click="loginGmail('google')"
+                class=" button button-positive  button-block icon-left ion-social-google "
+                id="signup-button5" style="background-color: #F44336;width: 160px">GOOGLE
+        </button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

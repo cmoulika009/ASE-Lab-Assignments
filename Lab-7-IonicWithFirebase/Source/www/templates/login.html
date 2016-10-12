@@ -1,0 +1,65 @@
+<ion-view style="" class=" " id="page5" title="myFoodCart" xmlns="http://www.w3.org/1999/html">
+  <ion-content class="has-header" padding="true" style="background: url(img/bg4.jpg) center; background-size: cover;">
+    <br/>
+    <br/>
+    <div class="app-icon"></div>
+    <br/>
+    <form name="loginForm" class="list " id="login-form1" style="border-radius: 5px;background-color: #f2f2f2">
+      <!--<ion-list class=" " id="login-list2">
+
+
+
+       <label class="item item-input" id="login-input3">
+         <span class="input-label">Email Id</span>
+         <input type="text" placeholder="Email" ng-model="user.email">
+       </label>
+
+      <label class="item item-input item-floating-label">
+         <span class="input-label" style="color: whitesmoke;"><b>Email</b></span>
+         <input ng-model="user.email" style="color: white;" type="email" placeholder="Email">
+       </label>
+       <label class="item item-input item-floating-label">
+         <span class="input-label" style="color: whitesmoke;"><b>Password</b></span>
+         <input ng-model="user.password" style="color: white;" type="password" placeholder="Password">
+       </label>
+
+     </ion-list>
+      <div style="border-radius: 5px;background-color: #f2f2f2;padding: 20px;>-->
+
+      <form>
+        <ion-list id="login-list2">
+          <label class="item item-input" id="login-input3">
+            <span class="input-label">Email Id</span>
+            <input type="email" placeholder="Email" ng-model="user.email">
+          </label>
+
+          <label class="item item-input" id="login-input4">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password" placeholder="Password">
+          </label>
+        </ion-list>
+      </form>
+
+
+      <button ng-click="loginEmail(loginForm,user)"
+              class=" button button-assertive  button-block  icon-left ion-ios-email-outline " id="signup-button3"
+              style="background-color: #009689;color: whitesmoke">LOGIN WITH EMAIL
+      </button>
+      <div align="center" style="font-size:130px">
+        <a class=" button button-stable  button-block button-clear icon-left ion-ios-email-outline" id="login-button5"
+           ui-sref="tabsController.forgotPassword" style="color:#f2fe71;"><b>FORGOT PASSWORD??</b></a>
+      </div>
+      <div align="center">
+      <button ng-click="login()"
+              class=" button button-positive  button-block icon-left ion-social-facebook " id="signup-button4"
+              style="width: 160px">FACEBOOK
+      </button>
+      <button ng-click="loginGmail('google')" class=" button button-positive  button-block icon-left ion-social-google "
+              id="signup-button5" style="background-color: #F44336;width: 160px">GOOGLE
+      </button>
+     </div>
+    </form>
+
+
+  </ion-content>
+</ion-view>
