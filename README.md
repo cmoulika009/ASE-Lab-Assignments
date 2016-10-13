@@ -16,4 +16,4 @@ Lab 5: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/ASE-Lab-Assignmen
 
 Lab 6: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/ASE-Lab-Assignment-6-:-Android-Application-Image-and-Maps
 
-
+Lab 7: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/Lab-Assignment-7:-Ionic-with-Firebase
