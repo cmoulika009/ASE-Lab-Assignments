@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    <title>Address-LatLng</title>
+
+</head>
+<body ng-app=calculate>
+<div ng-controller=calculatectrl>
+    <br/>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text">
+            <h2 style="color: whitesmoke;" align="center"><strong>Get</strong> Address from Latitude & Longitude</h2>
+
+        </div>
+    </div>
+    <br/><br/>
+    <div class="container" style="width: 50%">
+        <label for="height"></label>
+        <input type="number" class="form-control" placeholder="Enter Latitude" id="height" ng-model="h">
+        <label for="lng"></label>
+        <input type="number" class="form-control" placeholder="Enter Longitude" id="lng" ng-model="l">
+    </div>
+    <br><br>
+
+    <div class="centered">
+        <button class="btn btn-success" ng-click="bmi()"
+                style="background-color: #0c60ee;height:50px;width:500px;font-size: 20px">Get Address
+        </button>
+    </div>
+    <br/>
+    <br/>
+    <div class="container" style="background-color: whitesmoke;width: 500px">
+        <p ng-model=cal>
+            <br><br>
+        <div class="bg-warning"><b>Address:</b>&nbsp&nbsp{{cal.address}}</div>
+        <br>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

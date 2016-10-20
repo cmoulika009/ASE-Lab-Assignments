@@ -1,0 +1,27 @@
+form{
+    padding-left:20%;
+    padding-right: 20%;
+    padding-top: 10%;
+    color: #761c19;
+    font-size: medium;
+    font-family: "Comic Sans MS";
+
+
+}
+body{
+    background-image: url("bg.jpg");
+}
+.btn{
+    width: 15%;
+
+}
+.centered
+{
+    text-align: center;
+}
+.container{
+    padding-left:10%;
+    padding-right:10%;
+    font-size: large;
+    font-family: "Comic Sans MS";
+}
