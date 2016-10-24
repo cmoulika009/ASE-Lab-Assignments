@@ -17,3 +17,7 @@ Lab 5: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/ASE-Lab-Assignmen
 Lab 6: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/ASE-Lab-Assignment-6-:-Android-Application-Image-and-Maps
 
 Lab 7: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/Lab-Assignment-7:-Ionic-with-Firebase
+
+Lab 8: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/Lab-Assignment-8:-Cloud-Rest-App
+
+Lab 9: https://github.com/cmoulika009/ASE-Lab-Assignments/wiki/Lab-Assignment-9:-Cloud-Based-Application---II
