@@ -1,0 +1,313 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Mania</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/form-elements.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <script>
+        var googleUser = {};
+        var startApp = function () {
+            gapi.load('auth2', function () {
+                // Retrieve the singleton for the GoogleAuth library and set up the client.
+                auth2 = gapi.auth2.init({
+                    client_id: '416123897139-73umcr2tnq2iopiua2j1hsqq3gifafju.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin',
+                    // Request scopes in addition to 'profile' and 'email'
+                    //scope: 'additional_scope'
+                });
+                attachSignin(document.getElementById('customBtn'));
+            });
+        };
+
+        function attachSignin(element) {
+            console.log(element.id);
+            auth2.attachClickHandler(element, {},
+                    function (googleUser) {
+                        document.getElementById('name').innerText = "Signed in: " +
+                                googleUser.getBasicProfile().getName();
+                    }, function (error) {
+                        alert(JSON.stringify(error, undefined, 2));
+                    });
+        }
+    </script>
+
+    <style type="text/css">
+
+        #customBtn:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<!-- In the callback, you would hide the gSignInWrapper element on a
+successful sign in -->
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Music</strong> for every one</h1>
+                    <div class="description">
+                        <p><i>Music is a piece of art that goes straight to the heart..</i></p>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-5">
+
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3><b>Login to our site</b></h3>
+                                <p>Enter username and password to log on:</p>
+                            </div>
+                            <div class="form-top-right">
+                                <i class="fa fa-key"></i>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" action="home.html" method="post" class="login-form" name="myForm"
+                                  onsubmit="return validate()">
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-username">UserName</label>
+                                    <input type="text" name="username" placeholder="Username..."
+                                           class="form-username form-control" id="form-username">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-password">Password</label>
+                                    <input type="password" name="pwd" placeholder="Password..."
+                                           class="form-password form-control" id="form-password">
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" checked> Remember me</label>
+                                </div>
+                                <button type="submit" class="btn">Log In</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="social-login">
+                        <h3>...or login with:</h3>
+                        <div class="social-login-buttons">
+
+                            <a id="customBtn" class="customGPlusSignIn btn btn-link-1 btn-link-1-google-plus" href="#">
+                                <i class="fa fa-google-plus"></i> Google Plus</a>
+                            <script>startApp();</script>
+                            <a class="btn btn-link-1 btn-link-1-facebook" href="#" onclick="tLogin()">
+                                <i class="fa fa-facebook"></i> Facebook
+                            </a>
+                            <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+                                <i class="fa fa-twitter"></i> Twitter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 middle-border"></div>
+                <div class="col-sm-1"></div>
+
+                <div class="col-sm-5">
+
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3><b>Sign up now</b></h3>
+                                <p>Fill in the form below to get instant access:</p>
+                            </div>
+                            <div class="form-top-right">
+                                <i class="fa fa-pencil"></i>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" action="home.html"  method="post" class="registration-form" name="regmyForm"
+                                  onsubmit=" return registration()">
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-first-name">First name</label>
+                                    <input type="text" name="fname" placeholder="First name..."
+                                           class="form-first-name form-control" id="form-first-name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-last-name">Last name</label>
+                                    <input type="text" name="lname" placeholder="Last name..."
+                                           class="form-last-name form-control" id="form-last-name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-email">Email</label>
+                                    <input type="text" name="email" placeholder="Email..."
+                                           class="form-email form-control" id="form-email">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-user-name">User Name</label>
+                                    <input type="text" name="username" placeholder="UserName..."
+                                           class="form-username form-control" id="form-user-name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-pwd">Password</label>
+                                    <input type="text" name="pwd" placeholder="Password..."
+                                           class="form-pwd form-control" id="form-pwd">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-repwd">Retype Password</label>
+                                    <input type="text" name="repwd" placeholder="Retype Password..."
+                                           class="form-repwd form-control" id="form-repwd">
+                                </div>
+                                <button type="submit" class="btn">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="footer-border"></div>
+            <p>Copyright @ UMKC ASE <i class="fa fa-smile-o"></i></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Javascript -->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/jquery.backstretch.min.js"></script>
+<script src="js/scripts.js"></script>
+
+<script src="js/placeholder.js"></script>
+
+
+<script type="text/javascript">
+    var valid = false;
+
+    function validate() {
+        var msg = "";
+
+        var uname = document.myForm.username.value;
+        var pwd = document.myForm.pwd.value;
+        if (uname.length == 0 && pwd.length == 0)
+            msg = msg + "Please enter username and password \n";
+        else if (pwd.length == 0)
+            msg = msg + "Please enter password \n";
+        else if (uname.length == 0)
+            msg = msg + "Please enter username \n";
+
+        if (msg.length > 0) {
+            window.alert(msg);
+            valid = false;
+        }
+        else
+            valid = true;
+        return valid;
+    }
+
+    function registration() {
+        var msg = "";
+
+        var fname = document.regmyForm.fname.value;
+        var lname = document.regmyForm.lname.value;
+        var email = document.regmyForm.email.value;
+        var user = document.regmyForm.username.value;
+        var pwd = document.regmyForm.pwd.value;
+        var repwd = document.regmyForm.repwd.value;
+        if (fname.length == 0 && lname.length == 0 && email.length == 0 && user.length == 0 && pwd.length == 0 && repwd.length == 0)
+            msg = msg + "Please enter all the fields to have successful registration \n";
+        if (msg.length > 0) {
+            window.alert(msg);
+            valid = false;
+        }
+        else
+            valid = true;
+        return valid;
+    }
+
+    function logInAct() {
+        if (document.getElementById("username").value.length > 0 && document.getElementById("password").value.length > 0) {
+            window.location.href = 'home.html';
+        }
+        else
+            alert("Give all details");
+    }
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1415062328510630',
+            xfbml: true,
+            version: 'v2.7'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function tLogin() {
+        FB.login(function (response) {
+                    if (response.authResponse) {
+                        // document.getElementById('login').style.visibility=false;
+                        getInfo();
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                    }
+                }, {scope: 'email'}
+        );
+    }
+    function getInfo() {
+        FB.api('/me', function (response) {
+                    console.log(response.name.toString());
+                    var str = "<b>Name</b> : " + response.name + "<br>";
+                    str += "<b>Link: </b>" + response.link + "<br>";
+                    str += "<b>Username:</b> " + response.username + "<br>";
+                    str += "<b>id: </b>" + response.id + "<br>";
+                    str += "<b>Email:</b> " + response.email + "<br>";
+                    str += "<input type='button' value='Get Photo' onclick='getPhoto();'/>";
+                    str += "<input type='button' value='Logout' onclick='Logout();'/>";
+                    document.getElementById('status').innerHTML = "Connected";
+                    var name = response.name;
+                    console.log(name)
+                    localStorage.setItem("Name", name);
+                }
+        );
+        //document.getElementById('home').innerHTML =  document.getElementById('status').value;
+        window.location.href = 'home.html';
+    }
+    function navigate() {
+        var str = document.getElementById('status').value;
+        document.getElementById('home').innerHTML = str.toString();
+        window.location.href = 'home.html';
+    }
+    function Logout() {
+        FB.logout(function () {
+            document.location.reload();
+        });
+    }
+
+</script>
+
+</body>
+
+</html>

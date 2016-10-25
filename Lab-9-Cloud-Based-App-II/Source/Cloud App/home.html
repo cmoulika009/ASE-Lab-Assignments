@@ -1,0 +1,141 @@
+<html>
+<head>
+    <title>Music Mania</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"/>
+
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/stylish-portfolio.css" rel="stylesheet" type="text/css">
+
+
+
+    <style type="text/css">
+        .jumbotron {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .jumbotron p {
+            color: #aaa;
+        }
+
+        .jumbotron a {
+            color: #fff;
+        }
+
+        dialog {
+            width: 1000px;
+            background: #e8e8e8;
+            border: 1px solid #dadada;
+            font-family: sans-serif;
+            padding: 5px 10px 20px 20px;
+        }
+
+        .reg {
+            background-image: url("1.jpg");
+        }
+
+        .indent {
+            padding-left: 2em
+        }
+
+        .play {
+            padding-left: 8em
+        }
+
+    </style>
+</head>
+<body onload="startApp()" class="reg">
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top" onclick=$("#menu-close").click();><b><i>Welcome</i></b></a>
+        </li>
+        <li>
+            <a href="#services" ; align="left"><b>Settings</b></a>
+        </li>
+        <li>
+            <a href="#services" ; align="left"><b>Contact Us</b></a>
+        </li>
+        <li>
+            <a href="welcome.html" align="left"><b>Logout</b></a>
+        </li>
+    </ul>
+</nav>
+<!--<img src="assets/img/backgrounds/music.jpg" alt="music" style="width:128px;height:128px;">-->
+<h1 align="center" style="color: whitesmoke; font-family: Cambria; font-size: 50px">Music for everyone
+</h1>
+<p align="center" style="color: whitesmoke"><i>Music is a piece of art that goes straight to the heart..</i></p>
+<hr/>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <h3 style="color: whitesmoke"><i>Enter some keyword to get latest news</i></h3> <br/>
+
+            <div class="form-group">
+
+                <div class="col-lg-15">
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="height: 50px" placeholder="Search for news about..." id="newsSearch">
+                        <span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="getNews" style="height: 50px">Go!</button>
+						  </span>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <textarea class="form-control" id="alltext" rows="8" maxlength="500"
+                          placeholder="Latest news appears here for entered keyword..."></textarea>
+            </div>
+
+            <br/>
+            <br/>
+            <div id="status"></div>
+            <p class="indent">
+                <button class="btn btn-lg btn-primary btn-success" id="start">Create Spotify playlist from suggested
+                    list!
+                </button>
+            </p>
+            <!--<a href="https://www.spotify.com/us/tour/" style="color: whitesmoke">Click here to download Spotify,to build playlist from suggested tracks</a>-->
+        </div>
+
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-1"></div>
+        <div class="play col-sm-5">
+            <h3 style="color: whitesmoke;" align="center"><i>Enjoy the tracks</i></h3>
+            <p align="center"><b style="font-size: 50px; color: whitesmoke;"> &#8615;</b></p>
+            <form style="background-color: whitesmoke; width: 500px">
+                <div id="debug"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function (e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+</script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/fuzzyset.js"></script>
+<script type="text/javascript" src="js/wordcache.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>
