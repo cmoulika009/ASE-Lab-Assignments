@@ -112,7 +112,7 @@
 
     var doSearch = function(word, callback) {
         console.log('search for ' + word);
-        var url = 'https://api.spotify.com/v1/search?type=track&limit=50&q=' + encodeURIComponent('track:"'+word+'"');
+        var url = 'https://api.spotify.com/v1/search?type=track&limit=10&q=' + encodeURIComponent('track:"'+word+'"');
         $.ajax(url, {
             dataType: 'json',
             success: function(r) {
@@ -186,6 +186,7 @@
             '&response_type=token' +
             '&scope=playlist-read-private%20playlist-modify%20playlist-modify-private' +
             '&redirect_uri=' + encodeURIComponent(redirect_uri);
+        console.log(url);
         localStorage.setItem('createplaylist-tracks', JSON.stringify(g_tracks));
         localStorage.setItem('createplaylist-name', g_name);
         var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
@@ -255,7 +256,6 @@
             doLogin(function() {});
         })
         $("#getNews").click(function(){
-            //$('#alltext').text(document.getElementById("newsSearch").value);
             getNews();
             queueRefreshText();
 
